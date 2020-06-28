@@ -1,0 +1,122 @@
+<html>
+<head>
+<script src="/static/preview.js"></script>
+</head>
+<body>
+  <h1>Time Lapse Setup</h1>
+  <table>
+    <tr>
+      <td>Rotate:</td>
+      <td>
+	<select id="rot" name="rot">
+	  <option value="0">None</option>
+	  <option value="90">90</option>
+	  <option value="180">180</option>
+	  <option value="270">270</option>
+	</select>
+      </td>
+      <td>Rotate the image.</td>
+    </tr>
+    <tr>
+      <td>Exposure:</td>
+      <td>
+	<select id="exposure" name="exposure">
+	  <option value="off">Off</option>
+	  <option value="auto">Auto</option>
+	  <option value="night">Night</option>
+	  <option value="nightpreview">Night Preview</option>
+	  <option value="backlight">Backlight</option>
+	  <option value="spotlight">Spotlight</option>
+	  <option value="sports">Sports</option>
+	  <option value="snow">Snow</option>
+	  <option value="beach">Beach</option>
+	  <option value="verylong">Very Long</option>
+	  <option value="fixedfps">Fixed fps</option>
+	  <option value="antishake">Antishake</option>
+	  <option value="fireworks">Fireworks</option>
+	</select>
+      </td><td></td>
+    </tr>
+    <tr>
+      <td>AWB mode:</td>
+      <td>
+	<select id="awb" name="awb">
+	  <option value="off">Off</option>
+	  <option value="auto">Auto</option>
+	  <option value="sun">Sun</option>
+	  <option value="cloud">Cloud</option>
+	  <option value="shade">Shade</option>
+	  <option value="tungsten">Tungsten</option>
+	  <option value="fluorescent">Fluorescent</option>
+	  <option value="incandescent">Incandescent</option>
+	  <option value="flash">Flash</option>
+	  <option value="horizon">Horizon</option>
+	  <option value="greyworld">Greyworld</option>
+	</select>
+      </td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Sharpness:</td>
+      <td>
+	<input type="number" value="0" id="sh" min="-100" max="100"/>
+      </td>
+      <td>Set image sharpness (-100 to 100)</td>
+    </tr>
+    <tr>
+      <td>Contrast:</td>
+      <td>
+	<input type="number" value="0" id="co" min="-100" max="100"/>
+      </td>
+      <td>Set image contrast (-100 to 100)</td>
+    </tr>
+    <tr>
+      <td>Brightness:</td>
+      <td>
+	<input type="number" value="50" id="br" min="0" max="100"/>
+      </td>
+      <td>Set image brightness (0 to 100) 50 is the default. 0 is black, 100 is white.</td>
+    </tr>
+    <tr>
+      <td>Saturation:</td>
+      <td>
+	<input type="number" value="0" id="sa" min="-100" max="100"/>
+      </td>
+      <td>Set image saturation (-100 to 100)</td>
+    </tr>
+    <tr>
+      <td>Image Effects</td>
+      <td>
+	<select id="ifx" name="ifx">
+	  <option value="none">None</option>
+	  <option value="negative">Negative</option>
+	  <option value="solarise">Solarise</option>
+	  <option value="sketch">Sketch</option>
+	  <option value="denoise">Denoise</option>
+	  <option value="emboss">Emboss</option>
+	  <option value="oilpaint">Oil Paint</option>
+	  <option value="hatch">Hatch</option>
+	  <option value="gpen">GPen</option>
+	  <option value="pastel">Pastel</option>
+	  <option value="watercolour">Water Colour</option>
+	  <option value="film">Film</option>
+	  <option value="blur">Blur</option>
+	  <option value="saturation">Saturation</option>
+	  <option value="colourswap">Colour Swap</option>
+	  <option value="washedout">Washed Out</option>
+	  <option value="posterise">Posterise</option>
+	  <option value="colourpoint">Colour Point</option>
+	  <option value="colourbalance">Colour Balance</option>
+	  <option value="cartoon">Cartoon</option>
+	</select>
+    </tr>
+  </table>
+  <br/>
+  <br/>
+  <button type="button" onclick="get_preview()">Get Preview</button>
+  <hr/>
+  <img id="preview"/>
+  <div id="cmd_text"></div>
+  <div id="preview_div"></div>
+</body>
+</html>

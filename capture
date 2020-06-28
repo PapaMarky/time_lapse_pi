@@ -1,0 +1,5 @@
+#!/bin/bash
+
+DATE=$(date +"%Y%m%d%H%M")
+
+raspistill -t 1 -rot 270 -ex auto -awb auto -o /home/pi/camera/f_$DATE.jpg

@@ -1,0 +1,72 @@
+#!/usr/bin/python3 
+from datetime import datetime
+import getopt
+import os
+import subprocess
+import sys
+import time
+
+def usage():
+    U = '''
+USAGE: {} [--interval INTERVAL] [--prefix PREFIX] [--folder FOLDER] [--rotate ROT]
+       * INTERVAL - number of seconds between frames (default: 1)
+       * PREFIX   - frame filename prefix            (default: 'tl_')
+       * FOLDER   - subdirectory to hold frames      (default: 'frames')
+       * ROT      - rotation (0, 90, 180, 270)       (default: 0)
+'''
+    print(U)
+
+def parse_cmdline():
+    try:
+        optlist, args = getopt.getopt(sys.argv[1:], 'i:p:f:r:', ['interval=', 'prefix=', 'folder=', 'rotate='])
+    except getopt.GetoptError as err:
+        print(err)
+        usage()
+        sys.exit(2)
+    interval = 1
+    prefix = 'tl_'
+    folder = 'frames'
+    rotate = 0
+
+    for o, a in optlist:
+        if o in ('-i', '--interval'):
+            interval = float(a)
+        elif o in ('-p', '--prefix'):
+            prefix = a
+        elif o in ('-f', '--folder'):
+            folder = a
+        elif o in ('-r', '--rotate'):
+            rotate = a
+        else:
+            assert False, 'unknown option: {}'.format(o)
+
+    return {
+        'interval': interval,
+        'prefix': prefix,
+        'folder': folder,
+        'rotate': rotate
+    }
+
+def run(config):
+    if not os.path.exists(config['folder']):
+        os.makedirs(config['folder'])
+    rot = config['rotate']
+    ptime = 0
+    while True:
+        start = time.time()
+        now = datetime.now()
+        timestamp = now.strftime('%Y%m%d%H%M%S')
+        path = '{}/{}{}.png'.format(config['folder'], config['prefix'], timestamp)
+        cmd = '/usr/bin/raspistill -t 1 -awb auto -ex auto -rot {} -o {}'.format(rot, path)
+        print(cmd)
+        p = subprocess.run(cmd.split(), stdout=subprocess.PIPE, stderr=subprocess.STDOUT, encoding='utf-8')
+        elapsed = time.time() - start
+        interval = config['interval'] - elapsed
+        if interval < 0.0:
+            interval = 0.0
+        time.sleep(interval)
+        
+if __name__ == '__main__':
+    config = parse_cmdline()
+    print(config)
+    run(config)
