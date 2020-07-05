@@ -10,6 +10,7 @@ function get_preview() {
     var ifx = document.getElementById("ifx").value;
     
     var xhttp = new XMLHttpRequest();
+    document.getElementById("preview").src = "/static/Working.png";
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
 	    var arr = JSON.parse(xhttp.responseText)

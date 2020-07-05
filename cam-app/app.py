@@ -7,10 +7,12 @@ import subprocess
 
 from time import sleep
 
-def snapshot(br="50", rot="false", ex="off", awb="off", sh="0", co="0", sa="0", ifx="none", t=1):
-        h = 240*1.5
-        w = 320*1.5
-        cmd = 'raspistill -h {} -w {} -rot {} -br {} -ex {} -awb {} -sh {} -co {} -sa {} -ifx {} -t {} -o /home/pi/cam-app/static/preview.png'.format(h, w, rot, br, ex, awb, sh, co, sa, ifx, t)
+def snapshot(br="50", rot="false", ex="off", awb="off", sh="0", co="0", sa="0", ifx="none", t=1000):
+        h = 480 # 240*1.5
+        w = 640 # 320*1.5
+        # roi = '-roi 0.68,0.5,0.25,0.25'
+        roi = ''
+        cmd = 'raspistill -n {} -h {} -w {} -rot {} -br {} -ex {} -awb {} -sh {} -co {} -sa {} -ifx {} -t {} -o /home/pi/cam-app/static/preview.png'.format(roi, h, w, rot, br, ex, awb, sh, co, sa, ifx, t)
         p = subprocess.run(cmd.split(), stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
         print(p.stdout)
         return {'status': p.returncode, 'output': p.stdout.decode('utf-8'), 'command': cmd}
