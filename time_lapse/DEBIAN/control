@@ -1,5 +1,5 @@
 Package: time-lapse
-Version: 1.0.0
+Version: 1.0.1
 Section: custom
 Priority: optional
 Architecture: armhf
@@ -7,3 +7,4 @@ Essential: no
 Installed-Size: 1024
 Maintainer: Mark Dyer (heymarky@gmail.com)
 Description: Add time lapse tools to Raspberry Pi
+Depends: python3

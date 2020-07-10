@@ -23,6 +23,8 @@ if [ ! -d "${PACKAGE}/DEBIAN" ]; then
     exit 1
 fi
 
+echo "BUILDING ${PACKAGE}"
+
 ARCH=$(grep Architecture ${PACKAGE}/DEBIAN/control | awk '{print $2}')
 VERSION=$(grep Version ${PACKAGE}/DEBIAN/control | awk '{print $2}')
 /usr/bin/dpkg-deb --build ${PACKAGE}/
