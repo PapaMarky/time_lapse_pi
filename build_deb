@@ -1,0 +1,43 @@
+#!/bin/bash
+
+# Must be run as root.
+if [[ $EUID -ne 0 ]]; then
+   echo "This script must be run as root" 1>&2
+   exit 1
+fi
+
+PACKAGE=$1
+
+if [ -z "$PACKAGE" ]; then
+    echo "USAGE: build_deb PACKAGE"
+    exit 1
+fi
+
+if [ ! -d "${PACKAGE}" ]; then
+    echo "Package directory missing: ${PACKAGE}"
+    exit 1
+fi
+
+if [ ! -d "${PACKAGE}/DEBIAN" ]; then
+    echo "Package directory missing: ${PACKAGE}/DEBIAN"
+    exit 1
+fi
+
+ARCH=$(grep Architecture ${PACKAGE}/DEBIAN/control | awk '{print $2}')
+VERSION=$(grep Version ${PACKAGE}/DEBIAN/control | awk '{print $2}')
+/usr/bin/dpkg-deb --build ${PACKAGE}/
+
+if [ $? != 0 ]; then
+    echo "Failed to build package."
+    exit 1
+fi
+
+mkdir -p dist
+mv ${PACKAGE}.deb dist/${PACKAGE}-${VERSION}_${ARCH}.deb
+
+echo "Publishing ${PACKAGE}-${VERSION}_${ARCH}.deb..."
+
+cp dist/${PACKAGE}-${VERSION}_${ARCH}.deb /var/www/html/debian/
+
+(cd /var/www/html/debian/ && dpkg-scanpackages . | gzip -c9  > Packages.gz)
+
