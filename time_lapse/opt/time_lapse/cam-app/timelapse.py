@@ -7,6 +7,8 @@ import subprocess
 
 from time import sleep
 
+app = Flask(__name__)
+
 def snapshot(br="50", rot="false", ex="off", awb="off", sh="0", co="0", sa="0", ifx="none", t=1000):
         h = 480 # 240*1.5
         w = 640 # 320*1.5
@@ -20,7 +22,6 @@ def snapshot(br="50", rot="false", ex="off", awb="off", sh="0", co="0", sa="0", 
 app = Flask(__name__)
 
 @app.route('/')
-
 def index():
         return render_template('index.html', preview='preview.png')
 
