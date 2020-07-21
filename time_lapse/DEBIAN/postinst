@@ -1,0 +1,29 @@
+#! /bin/sh
+
+# This script typically completes any required configuration of the
+# package foo once it has been unpacked from its Debian archive
+# (“.deb”) file. Often ‘postinst’ scripts ask the user for input,
+# and/or warn the user that if they accept the default values, they
+# should remember to go back and re-configure that package as the
+# situation warrants. Many ‘postinst’ scripts then execute any
+# commands necessary to start or restart a service once a new package
+# has been installed or upgraded.
+
+echo "TIMELAPSE: postinst"
+
+systemctl enable timelapse
+systemctl start timelapse
+
+mkdir -p /etc/nginx/sites-available/
+mkdir -p /etc/nginx/sites-enabled/
+
+cp /opt/time_lapse/nginx/timelapse_proxy /etc/nginx/sites-available
+
+if [ -L /etc/nginx/sites-enabled/default ]; then
+    unlink /etc/nginx/sites-enabled/default
+fi
+ln -s /etc/nginx/sites-available/timelapse_proxy /etc/nginx/sites-enabled
+
+systemctl daemon-reload
+systemctl restart nginx
+

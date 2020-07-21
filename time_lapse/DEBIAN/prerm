@@ -4,6 +4,12 @@
 # package. It is executed before the removal of files associated with
 # the package.
 
+echo "TIMELAPSE: prerm"
+
+echo "Stopping NGINX..."
 systemctl stop nginx
 systemctl disable nginx
 
+echo "Stopping TIMELAPSE..."
+systemctl stop timelapse
+systemctl disable timelapse

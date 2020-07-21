@@ -5,3 +5,5 @@
 # for packages which are being upgraded until their installation or
 # upgrade is completed (following the successful execution of the
 # ‘postinst’ script).
+
+echo "TIMELAPSE: preinst"

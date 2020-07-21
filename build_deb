@@ -41,5 +41,5 @@ echo "Publishing ${PACKAGE}-${VERSION}_${ARCH}.deb..."
 
 cp dist/${PACKAGE}-${VERSION}_${ARCH}.deb /var/www/html/debian/
 
-(cd /var/www/html/debian/ && dpkg-scanpackages . | gzip -c9  > Packages.gz)
+(cd /var/www/html/debian/ && dpkg-scanpackages --multiversion . | gzip -c9  > Packages.gz)
 
