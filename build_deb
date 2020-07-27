@@ -23,6 +23,11 @@ if [ ! -d "${PACKAGE}/DEBIAN" ]; then
     exit 1
 fi
 
+if [ "${PACKAGE: -1}" == '/' ]; then
+    echo 'Trimming...'
+    PACKAGE="${PACKAGE%?}"
+fi
+
 echo "BUILDING ${PACKAGE}"
 
 ARCH=$(grep Architecture ${PACKAGE}/DEBIAN/control | awk '{print $2}')
