@@ -1,5 +1,5 @@
 # time_lapse_pi
-tools for using a Raspberry pi for time lapse photography
+tools for using a Raspberry pi for timelapse photography
 
 *NOTE*
 

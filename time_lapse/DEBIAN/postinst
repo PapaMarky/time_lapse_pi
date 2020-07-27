@@ -17,7 +17,7 @@ systemctl start timelapse
 mkdir -p /etc/nginx/sites-available/
 mkdir -p /etc/nginx/sites-enabled/
 
-cp /opt/time_lapse/nginx/timelapse_proxy /etc/nginx/sites-available
+cp /opt/timelapse/nginx/timelapse_proxy /etc/nginx/sites-available
 
 if [ -L /etc/nginx/sites-enabled/default ]; then
     unlink /etc/nginx/sites-enabled/default
