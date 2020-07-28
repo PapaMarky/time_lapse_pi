@@ -5,8 +5,8 @@ After=network.target
 [Service]
 User=www-data
 Group=www-data
-WorkingDirectory=/opt/time_lapse/cam-app
-ExecStart=/usr/local/bin/uwsgi --ini /opt/time_lapse/uwsgi.ini
+WorkingDirectory=/opt/timelapse/cam-app
+ExecStart=/usr/local/bin/uwsgi --ini /opt/timelapse/uwsgi.ini
 
 [Install]
 WantedBy=multi-user.target
